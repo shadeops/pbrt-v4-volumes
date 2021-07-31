@@ -1,0 +1,5 @@
+*.exr
+*.nvdb
+*.hip*
+*.pbrt
+*.bgeo.sc

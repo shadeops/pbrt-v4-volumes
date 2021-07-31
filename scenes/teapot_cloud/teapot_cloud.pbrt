@@ -1,0 +1,48 @@
+Film "rgb"
+    "string filename" [ "teapot_cloud.exr" ]
+    "integer yresolution" [ 720 ]
+    "integer xresolution" [ 1280 ]
+PixelFilter "gaussian"
+    "float xradius" [ 2 ]
+    "float yradius" [ 2 ]
+Sampler "zsobol"
+    "integer pixelsamples" [ 4096 ]
+Integrator "volpath"
+    "integer maxdepth" [ 50 ]
+
+Accelerator "bvh"
+Transform [ 1 0 0 0 0 1 0 0 0 0 -1 0 0 0 3 1  ]
+Camera "perspective"
+    "float screenwindow" [ -1 1 -0.5625 0.5625 ]
+    "float fov" [ 45.000042 ]
+
+WorldBegin
+
+AttributeBegin
+    # {
+    Transform [ -0.9848077 -0.044943456 -0.16773126 0 0 0.9659258 -0.25881904 0 0.17364818 -0.254887 -0.95125127 0 0 0 0 1  ]
+    Scale 1 1 -1
+    Rotate 90 0 0 1
+    Rotate 90 0 1 0
+    LightSource "infinite"
+        "float scale" [ 3.2490096 ]
+        "string filename" [ "env/high_sun.exr" ]
+AttributeEnd
+
+AttributeBegin
+    MakeNamedMedium "/obj/teapot_cloud/RENDER-0"
+        "spectrum sigma_s" [ 400 1 800 1 ]
+        "spectrum sigma_a" [ 400 0 800 0 ]
+        "string filename" [ "geometry/teapot_cloud-RENDER-0.85.nvdb" ]
+        "string type" [ "nanovdb" ]
+
+    Material "interface"
+    MediumInterface "/obj/teapot_cloud/RENDER-0" ""
+    Shape "trianglemesh"
+        "point3 P" [ 1.0011274 -0.4641242 0.67125404 -1.0471562 -0.4641242 0.67125404 
+                     1.0011274 0.5638534 0.67125404 -1.0471562 0.5638534 0.67125404 
+                     -1.0471562 -0.4641242 -0.69426847 1.0011274 -0.4641242 -0.69426847 
+                     -1.0471562 0.5638534 -0.69426847 1.0011274 0.5638534 -0.69426847 ]
+        "integer indices" [ 0 3 1 0 2 3 4 7 5 4 6 7 6 2 7 6 3 2 5 1 4 5 0 1 5 
+                            2 0 5 7 2 1 6 4 1 3 6 ]
+AttributeEnd
