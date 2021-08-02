@@ -1,5 +1,6 @@
+ColorSpace "aces2065-1"
 Film "rgb"
-    "string filename" [ "teapot_cloud.exr" ]
+    "string filename" [ "teapot_cloud_aces.exr" ]
     "integer yresolution" [ 720 ]
     "integer xresolution" [ 1280 ]
 PixelFilter "gaussian"
