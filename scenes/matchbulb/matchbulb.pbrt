@@ -1,0 +1,389 @@
+Film "rgb"
+    "string filename" [ "matchbulb.exr" ]
+    "integer yresolution" [ 1080 ]
+    "integer xresolution" [ 1920 ]
+PixelFilter "gaussian"
+    "float xradius" [ 2 ]
+    "float yradius" [ 2 ]
+Sampler "zsobol"
+    "integer pixelsamples" [ 16384 ]
+Integrator "volpath"
+    "integer maxdepth" [ 50 ]
+
+Accelerator "bvh"
+Transform [ 1 0 0 0 0 1 0 0 0 0 -1 0 0 -1.1793004 6.285956 1  ]
+Camera "perspective"
+    "float lensradius" [ 0.1 ]
+    "float fov" [ 45 ]
+    "float focaldistance" [ 6.25 ]
+    "float screenwindow" [ -1 1 -0.5625 0.5625 ]
+
+
+WorldBegin
+
+#  --------------------------------------------------
+#  /obj/key_light
+AttributeBegin
+    Translate -7.3736606 6.133034 -4.33098
+    Rotate 1.2462447 0 0 1
+    Rotate -120.24111 0 1 0
+    Rotate -19.609451 1 0 0
+    AreaLightSource "diffuse"
+        "rgb L" [ 1 0.8466667 0.8 ]
+        "float scale" [ 5.656854 ]
+        "bool twosided" [ false ]
+
+    AttributeBegin
+        Scale 2 4 2
+        ReverseOrientation
+        Shape "bilinearmesh"
+            "point3 P" [ -0.5 -0.5 0 0.5 -0.5 0 -0.5 0.5 0 0.5 0.5 0 ]
+    AttributeEnd
+AttributeEnd
+
+Texture "/mat/matchstick_color1" "spectrum" "imagemap"
+    "string filename" [ "tex/plane_BaseColor.exr" ]
+
+Texture "/mat/matchstick_color2" "float" "imagemap"
+    "string filename" [ "tex/plane_Roughness.exr" ]
+
+MakeNamedMaterial "/mat/pbrt_material_coateddiffuse1"
+    "float thickness" [ 0.1 ]
+    "rgb albedo" [ 1 1 1 ]
+    "texture roughness" [ "/mat/matchstick_color2" ]
+    "texture reflectance" [ "/mat/matchstick_color1" ]
+    "string normalmap" [ "tex/plane_Normal.exr" ]
+    "bool remaproughness" [ false ]
+    "string type" [ "coateddiffuse" ]
+
+Texture "/mat/aluminum_roughness" "float" "imagemap"
+    "float scale" [ 0.3 ]
+    "string filename" [ "tex/bulb_cap_Roughness.exr" ]
+
+MakeNamedMaterial "/mat/aluminum_rough"
+    "spectrum k" [ "metal-Ag-k" ]
+    "string normalmap" [ "tex/bulb_cap_Normal.exr" ]
+    "bool remaproughness" [ false ]
+    "spectrum eta" [ "metal-Ag-eta" ]
+    "texture roughness" [ "/mat/aluminum_roughness" ]
+    "string type" [ "conductor" ]
+
+MakeNamedMaterial "/mat/glass"
+    "string type" [ "dielectric" ]
+
+MakeNamedMaterial "/mat/ceramic"
+    "float roughness" [ 0.01 ]
+    "rgb reflectance" [ 0.08 0.08 0.08 ]
+    "string type" [ "coateddiffuse" ]
+
+MakeNamedMaterial "/mat/aluminum"
+    "spectrum eta" [ "metal-Ag-eta" ]
+    "spectrum k" [ "metal-Ag-k" ]
+    "float roughness" [ 0.05 ]
+    "string type" [ "conductor" ]
+
+Texture "/mat/matchstick_color" "spectrum" "imagemap"
+    "string filename" [ "tex/matchstick_BaseColor.exr" ]
+
+MakeNamedMaterial "/mat/matchstick"
+    "string normalmap" [ "tex/matchstick_Normal.exr" ]
+    "texture reflectance" [ "/mat/matchstick_color" ]
+    "string type" [ "diffuse" ]
+
+
+ObjectBegin "/obj/bulb.ref"
+    AttributeBegin
+        AttributeBegin
+            NamedMaterial "/mat/aluminum"
+            Shape "plymesh" "string filename" "geometry/bulb_contact.ply"
+        AttributeEnd
+
+        AttributeBegin
+            NamedMaterial "/mat/ceramic"
+            Shape "plymesh" "string filename" "geometry/ceramic.ply"
+        AttributeEnd
+
+        AttributeBegin
+            NamedMaterial "/mat/glass"
+            Shape "plymesh" "string filename" "geometry/glass_bulb.ply"
+        AttributeEnd
+
+        AttributeBegin
+            NamedMaterial "/mat/aluminum_rough"
+            Shape "plymesh" "string filename" "geometry/bulb_cap.ply"
+        AttributeEnd
+    AttributeEnd
+ObjectEnd
+
+ObjectBegin "/obj/match.ref"
+    AttributeBegin
+        NamedMaterial "/mat/matchstick"
+        Shape "plymesh" "string filename" "geometry/matchstick.ply"
+    AttributeEnd
+ObjectEnd
+
+AttributeBegin
+    ConcatTransform [ 5 0 0 0 0 5 0 0 0 0 5 0 0 0 0 1  ]
+    NamedMaterial "/mat/pbrt_material_coateddiffuse1"
+    Shape "plymesh" "string filename" "geometry/ground.ply"
+AttributeEnd
+
+#  --------------------------------------------------
+#  /obj/flame
+AttributeBegin
+    AttributeBegin
+        MakeNamedMedium "/obj/flame/RENDER-0"
+            "rgb sigma_s" [ 2 2 2 ]
+            "string filename" [ "geometry/flame-RENDER-0.64.nvdb" ]
+            "float temperaturescale" [ 5500 ]
+            "float temperaturecutoff" [ 0.01 ]
+            "rgb sigma_a" [ 0.05 0.05 0.05 ]
+            "float LeScale" [ 1.25 ]
+            "string type" [ "nanovdb" ]
+
+        Material "interface"
+        MediumInterface "/obj/flame/RENDER-0" ""
+        Shape "trianglemesh"
+            "point3 P" [ 0.52499956 1.2099994 0.46499974 -0.47000048 1.2099994 0.46499974 
+                         0.52499956 2.3099995 0.46499974 -0.47000048 2.3099995 0.46499974 
+                         -0.47000048 1.2099994 -0.5150003 0.52499956 1.2099994 -0.5150003 
+                         -0.47000048 2.3099995 -0.5150003 0.52499956 2.3099995 -0.5150003 ]
+            "integer indices" [ 0 3 1 0 2 3 4 7 5 4 6 7 6 2 7 6 3 2 5 1 4 5 0 1 5 
+                                2 0 5 7 2 1 6 4 1 3 6 ]
+    AttributeEnd
+AttributeEnd
+
+#  --------------------------------------------------
+#  /obj/bulb
+AttributeBegin
+    AttributeBegin
+        ObjectInstance "/obj/bulb.ref"
+    AttributeEnd
+AttributeEnd
+
+#  --------------------------------------------------
+#  /obj/match
+AttributeBegin
+    AttributeBegin
+        ObjectInstance "/obj/match.ref"
+    AttributeEnd
+AttributeEnd
+
+#  --------------------------------------------------
+#  /obj/flame_L1
+AttributeBegin
+    AttributeBegin
+        MakeNamedMedium "/obj/flame_L1/RENDER-0"
+            "rgb sigma_s" [ 2 2 2 ]
+            "string filename" [ "geometry/flame_L1-RENDER-0.64.nvdb" ]
+            "float temperaturescale" [ 5500 ]
+            "float temperaturecutoff" [ 0.01 ]
+            "rgb sigma_a" [ 0.05 0.05 0.05 ]
+            "float LeScale" [ 1.25 ]
+            "string type" [ "nanovdb" ]
+
+        Material "interface"
+        MediumInterface "/obj/flame_L1/RENDER-0" ""
+        Shape "trianglemesh"
+            "point3 P" [ -0.99499977 0.37999898 -4.625 -2.0299997 0.37999898 -4.625 
+                         -0.99499977 1.2849989 -4.625 -2.0299997 1.2849989 -4.625 
+                         -2.0299997 0.37999898 -5.615 -0.99499977 0.37999898 -5.615 
+                         -2.0299997 1.2849989 -5.615 -0.99499977 1.2849989 -5.615 ]
+            "integer indices" [ 0 3 1 0 2 3 4 7 5 4 6 7 6 2 7 6 3 2 5 1 4 5 0 1 5 
+                                2 0 5 7 2 1 6 4 1 3 6 ]
+    AttributeEnd
+AttributeEnd
+
+#  --------------------------------------------------
+#  /obj/bulb_L1
+AttributeBegin
+    ConcatTransform [ 0.76604444 0 -0.64278764 0 -0.6232521 0.24466307 -0.7427629 0 0.1572664 0.9696082 0.18742278 0 -0.5 0.2452139 -3.943021 1  ]
+    AttributeBegin
+        ObjectInstance "/obj/bulb.ref"
+    AttributeEnd
+AttributeEnd
+
+#  --------------------------------------------------
+#  /obj/match_L1
+AttributeBegin
+    ConcatTransform [ 0.76604444 0 -0.64278764 0 -0.6232521 0.24466307 -0.7427629 0 0.1572664 0.9696082 0.18742278 0 -0.5 0.2452139 -3.943021 1  ]
+    AttributeBegin
+        ObjectInstance "/obj/match.ref"
+    AttributeEnd
+AttributeEnd
+
+#  --------------------------------------------------
+#  /obj/flame_R1
+AttributeBegin
+    AttributeBegin
+        MakeNamedMedium "/obj/flame_R1/RENDER-0"
+            "rgb sigma_s" [ 2 2 2 ]
+            "string filename" [ "geometry/flame_R1-RENDER-0.64.nvdb" ]
+            "float temperaturescale" [ 5500 ]
+            "float temperaturecutoff" [ 0.01 ]
+            "rgb sigma_a" [ 0.05 0.05 0.05 ]
+            "float LeScale" [ 1.25 ]
+            "string type" [ "nanovdb" ]
+
+        Material "interface"
+        MediumInterface "/obj/flame_R1/RENDER-0" ""
+        Shape "trianglemesh"
+            "point3 P" [ 2.3499994 0.37499914 -2.355 1.3399994 0.37499914 -2.355 
+                         2.3499994 1.2849991 -2.355 1.3399994 1.2849991 -2.355 1.3399994 
+                         0.37499914 -3.395 2.3499994 0.37499914 -3.395 1.3399994 
+                         1.2849991 -3.395 2.3499994 1.2849991 -3.395 ]
+            "integer indices" [ 0 3 1 0 2 3 4 7 5 4 6 7 6 2 7 6 3 2 5 1 4 5 0 1 5 
+                                2 0 5 7 2 1 6 4 1 3 6 ]
+    AttributeEnd
+AttributeEnd
+
+#  --------------------------------------------------
+#  /obj/bulb_R1
+AttributeBegin
+    ConcatTransform [ -0.5 0 0.8660254 0 0.8397053 0.24466307 0.4848041 0 -0.21188444 0.9696082 -0.12233154 0 0.50736 0.2452139 -3.636737 1  ]
+    AttributeBegin
+        ObjectInstance "/obj/bulb.ref"
+    AttributeEnd
+AttributeEnd
+
+#  --------------------------------------------------
+#  /obj/match_R1
+AttributeBegin
+    ConcatTransform [ -0.5 0 0.8660254 0 0.8397053 0.24466307 0.4848041 0 -0.21188444 0.9696082 -0.12233154 0 0.50736 0.2452139 -3.636737 1  ]
+    AttributeBegin
+        ObjectInstance "/obj/match.ref"
+    AttributeEnd
+AttributeEnd
+
+#  --------------------------------------------------
+#  /obj/flame_L2
+AttributeBegin
+    AttributeBegin
+        MakeNamedMedium "/obj/flame_L2/RENDER-0"
+            "rgb sigma_s" [ 2 2 2 ]
+            "string filename" [ "geometry/flame_L2-RENDER-0.64.nvdb" ]
+            "float temperaturescale" [ 5500 ]
+            "float temperaturecutoff" [ 0.01 ]
+            "rgb sigma_a" [ 0.05 0.05 0.05 ]
+            "float LeScale" [ 1.25 ]
+            "string type" [ "nanovdb" ]
+
+        Material "interface"
+        MediumInterface "/obj/flame_L2/RENDER-0" ""
+        Shape "trianglemesh"
+            "point3 P" [ -1.1249996 0.37999898 -0.09500042 -2.1549995 0.37999898 
+                         -0.09500042 -1.1249996 1.2849989 -0.09500042 -2.1549995 
+                         1.2849989 -0.09500042 -2.1549995 0.37999898 -1.1400003 -1.1249996 
+                         0.37999898 -1.1400003 -2.1549995 1.2849989 -1.1400003 -1.1249996 
+                         1.2849989 -1.1400003 ]
+            "integer indices" [ 0 3 1 0 2 3 4 7 5 4 6 7 6 2 7 6 3 2 5 1 4 5 0 1 5 
+                                2 0 5 7 2 1 6 4 1 3 6 ]
+    AttributeEnd
+AttributeEnd
+
+#  --------------------------------------------------
+#  /obj/bulb_L2
+AttributeBegin
+    ConcatTransform [ -0.7858569 0 0.6184084 0 0.59961385 0.24466307 0.76197326 0 -0.1513017 0.9696082 -0.19227016 0 -2.59264 0.2452139 -1.83674 1  ]
+    AttributeBegin
+        ObjectInstance "/obj/bulb.ref"
+    AttributeEnd
+AttributeEnd
+
+#  --------------------------------------------------
+#  /obj/match_L2
+AttributeBegin
+    ConcatTransform [ -0.7858569 0 0.6184084 0 0.59961385 0.24466307 0.76197326 0 -0.1513017 0.9696082 -0.19227016 0 -2.59264 0.2452139 -1.83674 1  ]
+    AttributeBegin
+        ObjectInstance "/obj/match.ref"
+    AttributeEnd
+AttributeEnd
+
+#  --------------------------------------------------
+#  /obj/flame_R2
+AttributeBegin
+
+    AttributeBegin
+        MakeNamedMedium "/obj/flame_R2/RENDER-0"
+            "rgb sigma_s" [ 2 2 2 ]
+            "string filename" [ "geometry/flame_R2-RENDER-0.64.nvdb" ]
+            "float temperaturescale" [ 5500 ]
+            "float temperaturecutoff" [ 0.01 ]
+            "rgb sigma_a" [ 0.05 0.05 0.05 ]
+            "float LeScale" [ 1.25 ]
+            "string type" [ "nanovdb" ]
+
+        Material "interface"
+        MediumInterface "/obj/flame_R2/RENDER-0" ""
+        Shape "trianglemesh"
+            "point3 P" [ 2.9599993 0.37999916 1.6199996 1.9449993 0.37999916 1.6199996 
+                         2.9599993 1.2849991 1.6199996 1.9449993 1.2849991 1.6199996 
+                         1.9449993 0.37999916 0.61999965 2.9599993 0.37999916 0.61999965 
+                         1.9449993 1.2849991 0.61999965 2.9599993 1.2849991 0.61999965 ]
+            "integer indices" [ 0 3 1 0 2 3 4 7 5 4 6 7 6 2 7 6 3 2 5 1 4 5 0 1 5 
+                                2 0 5 7 2 1 6 4 1 3 6 ]
+    AttributeEnd
+AttributeEnd
+
+#  --------------------------------------------------
+#  /obj/bulb_R2
+AttributeBegin
+    ConcatTransform [ 0.49044752 0 0.87147075 0 0.8449851 0.24466307 -0.47554192 0 -0.2132167 0.9696082 0.119994394 0 1.09596 0.2452139 1.87731 1  ]
+    AttributeBegin
+        ObjectInstance "/obj/bulb.ref"
+    AttributeEnd
+AttributeEnd
+
+#  --------------------------------------------------
+#  /obj/match_R2
+AttributeBegin
+    ConcatTransform [ 0.49044752 0 0.87147075 0 0.8449851 0.24466307 -0.47554192 0 -0.2132167 0.9696082 0.119994394 0 1.09596 0.2452139 1.87731 1  ]
+
+    AttributeBegin
+        ObjectInstance "/obj/match.ref"
+    AttributeEnd
+AttributeEnd
+
+#  --------------------------------------------------
+#  /obj/flame_L3
+AttributeBegin
+
+    AttributeBegin
+        MakeNamedMedium "/obj/flame_L3/RENDER-0"
+            "rgb sigma_s" [ 2 2 2 ]
+            "string filename" [ "geometry/flame_L3-RENDER-0.64.nvdb" ]
+            "float temperaturescale" [ 5500 ]
+            "float temperaturecutoff" [ 0.01 ]
+            "rgb sigma_a" [ 0.05 0.05 0.05 ]
+            "float LeScale" [ 1.25 ]
+            "string type" [ "nanovdb" ]
+
+        Material "interface"
+        MediumInterface "/obj/flame_L3/RENDER-0" ""
+        Shape "trianglemesh"
+            "point3 P" [ -6.445 0.37999922 -12.445003 -7.47 0.37999922 -12.445003 
+                         -6.445 1.2849993 -12.445003 -7.47 1.2849993 -12.445003 -7.47 
+                         0.37999922 -13.475003 -6.445 0.37999922 -13.475003 -7.47 
+                         1.2849993 -13.475003 -6.445 1.2849993 -13.475003 ]
+            "integer indices" [ 0 3 1 0 2 3 4 7 5 4 6 7 6 2 7 6 3 2 5 1 4 5 0 1 5 
+                                2 0 5 7 2 1 6 4 1 3 6 ]
+    AttributeEnd
+AttributeEnd
+
+#  --------------------------------------------------
+#  /obj/bulb_L3
+AttributeBegin
+    ConcatTransform [ 0.98768836 0 -0.15643446 0 -0.15168013 0.24466307 -0.9576707 0 0.038273737 0.9696082 0.24165086 0 -6.69 0.2452139 -11.44302 1  ]
+    AttributeBegin
+        ObjectInstance "/obj/bulb.ref"
+    AttributeEnd
+AttributeEnd
+
+#  --------------------------------------------------
+#  /obj/match_L3
+AttributeBegin
+    ConcatTransform [ 0.98768836 0 -0.15643446 0 -0.15168013 0.24466307 -0.9576707 0 0.038273737 0.9696082 0.24165086 0 -6.69 0.2452139 -11.44302 1  ]
+    AttributeBegin
+        ObjectInstance "/obj/match.ref"
+    AttributeEnd
+AttributeEnd
