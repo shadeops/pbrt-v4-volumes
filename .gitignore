@@ -1,5 +1,4 @@
-*.exr
-*.nvdb
-*.hip*
-*.pbrt
-*.bgeo.sc
+*
+!*/
+!scenes/**
+scenes/*/*.exr
