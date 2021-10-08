@@ -1,14 +1,15 @@
-SPP = --spp 4096
+SPP = --spp 256
 GPU = --gpu
 
 all: ./images/aerial_explosion_filmic.png \
 	 ./images/teapot_cloud_filmic.png \
 	 ./images/ground_explosion_filmic.png \
 	 ./images/ground_explosion_alt_filmic.png \
-	 ./images/smoke_streams_filmic.png \
 	 ./images/matchbulb_filmic.png \
 	 ./images/anemone_tonemap.png \
 	 ./images/rainbow_box_tonemap.png
+
+#	 ./images/smoke_streams_tonemap.png
 
 ./aerial_explosion/aerial_explosion_aces.exr : ./aerial_explosion/aerial_explosion.pbrt
 	pbrt $(SPP) $(GPU) --outfile $@ $<
@@ -34,11 +35,11 @@ all: ./images/aerial_explosion_filmic.png \
 ./images/ground_explosion_alt_filmic.png : ./ground_explosion/ground_explosion_alt_aces.exr
 	imgtool convert --outfile $@ --colorspace srgb --aces-filmic $<
 
-./smoke_streams/smoke_streams.exr : ./smoke_streams/smoke_streams.pbrt
-	pbrt $(SPP) $(GPU) --outfile $@ $<
-
-./images/smoke_streams_tonemap.png : ./smoke_streams/smoke_streams.exr
-	imgtool convert --outfile $@ --tonemap $<
+#./smoke_streams/smoke_streams.exr : ./smoke_streams/smoke_streams.pbrt
+#	pbrt $(SPP) $(GPU) --outfile $@ $<
+#
+#./images/smoke_streams_tonemap.png : ./smoke_streams/smoke_streams.exr
+#	imgtool convert --outfile $@ --tonemap $<
 
 ./matchbulb/matchbulb.exr : ./matchbulb/matchbulb.pbrt
 	pbrt $(SPP) $(GPU) --outfile $@ $<
@@ -58,7 +59,8 @@ all: ./images/aerial_explosion_filmic.png \
 ./images/rainbow_box_tonemap.png : ./rainbow_box/rainbow_box.exr
 	imgtool convert --outfile $@ --maxluminance 3 --tonemap $<
 
+.PHONY: clean
 clean:
 	rm -vf ./images/*.png
-	rm -vf */*_aces.exr
+	rm -vf */*.exr
 
