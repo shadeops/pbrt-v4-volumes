@@ -1,0 +1,153 @@
+Film "rgb"
+    "integer yresolution" [ 720 ]
+    "integer xresolution" [ 1280 ]
+    "string filename" [ "anemone.exr" ]
+PixelFilter "gaussian"
+    "float yradius" [ 2 ]
+    "float xradius" [ 2 ]
+Sampler "zsobol"
+    "integer pixelsamples" [ 8192 ]
+Integrator "volpath"
+    "integer maxdepth" [ 30 ]
+Accelerator "bvh"
+Transform [ 1 0 0 0 0 0.978148 -0.207912 0 0 -0.207912 -0.978148 0 0 -3.81345 25.3467 1  ]
+Camera "perspective"
+    "float screenwindow" [ -1 1 -0.5625 0.5625 ]
+    "float fov" [ 45 ]
+
+
+WorldBegin
+
+Texture "/mat/pbrt_texture_directionmix1" "float" "directionmix"
+    "float tex2" [ 0.005 ]
+    "float tex1" [ 0.0005 ]
+    "vector3 dir" [ 0 9 24 ]
+MakeNamedMaterial "/mat/glass_orb_rough"
+    "texture roughness" [ "/mat/pbrt_texture_directionmix1" ]
+    "string type" [ "dielectric" ]
+MakeNamedMaterial "/mat/metal_stand"
+    "float roughness" [ 0.001 ]
+    "spectrum k" [ "metal-TiO2-k" ]
+    "spectrum eta" [ "metal-TiO2-eta" ]
+    "string type" [ "conductor" ]
+
+#  /obj/anemone
+AttributeBegin
+    ConcatTransform [ 1 0 0 0 0 1 0 0 0 0 1 0 0 4.705 0 1  ]
+
+    AttributeBegin
+        ConcatTransform [ 3.18 0 0 0 0 3.212 0 0 0 0 3.1 0 0.008 -0.024 -0.064 1  ]
+        Include "./geometry/anemone_medium.pbrt.gz"
+        Material "interface"
+        MediumInterface "/obj/medium_anemone/timeshift1[1,0]" ""
+        Shape "trianglemesh"
+            "integer indices" [ 0 3 1 0 2 3 4 7 5 4 6 7 6 2 7 6 3 2 5 1 4 5 0 1 5 
+                                2 0 5 7 2 1 6 4 1 3 6 ]
+            "point3 P" [ 1 -1 1 -1 -1 1 1 1 1 -1 1 1 -1 -1 -1 1 -1 -1 -1 1 -1 1 1 
+                         -1 ]
+    AttributeEnd
+AttributeEnd
+
+#  /obj/ground
+AttributeBegin
+    ConcatTransform [ 10 0 0 0 0 10 0 0 0 0 10 0 0 0 0 1  ]
+
+    AttributeBegin
+        ConcatTransform [ 500 0 0 0 0 0 -500 0 0 1 0 0 0 0 0 1  ]
+        Shape "disk"
+    AttributeEnd
+AttributeEnd
+
+#  /obj/orb
+AttributeBegin
+    ConcatTransform [ 1 0 0 0 0 1 0 0 0 0 1 0 0 4.705 0 1  ]
+    NamedMaterial "/mat/glass_orb_rough"
+
+    AttributeBegin
+        ReverseOrientation
+
+        AttributeBegin
+            ConcatTransform [ 3.52 0 0 0 0 0 -3.52 0 0 3.52 0 0 0 0 0 1  ]
+            Scale 1 1 -1
+            Shape "sphere"
+        AttributeEnd
+
+        AttributeBegin
+            ConcatTransform [ 3.696 0 0 0 0 0 -3.696 0 0 3.696 0 0 0 0 0 1  ]
+            Scale 1 1 -1
+            Shape "sphere"
+        AttributeEnd
+    AttributeEnd
+AttributeEnd
+
+#  /obj/metal_stand
+AttributeBegin
+    ConcatTransform [ 3.7 0 0 0 0 3.7 0 0 0 0 3.7 0 0 0 0 1  ]
+    NamedMaterial "/mat/metal_stand"
+
+    AttributeBegin
+        ReverseOrientation
+
+        AttributeBegin
+            ConcatTransform [ 0.04 0 0 0 0 0 -0.04 0 0 0.04 0 0 0.879841 0.70134 0 1  ]
+            Shape "sphere"
+        AttributeEnd
+
+        AttributeBegin
+            ConcatTransform [ 0.04 0 0 0 0 0 -0.04 0 0 0.04 0 0 0.993051 0.04 0 1  ]
+            Shape "sphere"
+        AttributeEnd
+
+        AttributeBegin
+            ConcatTransform [ 0.02 0 -0.034641 0 -0.034641 0 -0.02 0 0 0.04 0 0 0.439921 0.70134 -0.761965 1  ]
+            Shape "sphere"
+        AttributeEnd
+
+        AttributeBegin
+            ConcatTransform [ 0.02 0 -0.034641 0 -0.034641 0 -0.02 0 0 0.04 0 0 0.496525 0.04 -0.860007 1  ]
+            Shape "sphere"
+        AttributeEnd
+
+        AttributeBegin
+            ConcatTransform [ -0.02 0 -0.034641 0 -0.034641 0 0.02 0 0 0.04 0 0 -0.439921 0.70134 -0.761965 1  ]
+            Shape "sphere"
+        AttributeEnd
+
+        AttributeBegin
+            ConcatTransform [ -0.02 0 -0.034641 0 -0.034641 0 0.02 0 0 0.04 0 0 -0.496525 0.04 -0.860007 1  ]
+            Shape "sphere"
+        AttributeEnd
+
+        AttributeBegin
+            ConcatTransform [ -0.04 0 0 0 0 0 0.04 0 0 0.04 0 0 -0.879841 0.70134 0 1  ]
+            Shape "sphere"
+        AttributeEnd
+
+        AttributeBegin
+            ConcatTransform [ -0.04 0 0 0 0 0 0.04 0 0 0.04 0 0 -0.993051 0.04 0 1  ]
+            Shape "sphere"
+        AttributeEnd
+
+        AttributeBegin
+            ConcatTransform [ -0.02 0 0.034641 0 0.034641 0 0.02 0 0 0.04 0 0 -0.439921 0.70134 0.761965 1  ]
+            Shape "sphere"
+        AttributeEnd
+
+        AttributeBegin
+            ConcatTransform [ -0.02 0 0.034641 0 0.034641 0 0.02 0 0 0.04 0 0 -0.496525 0.04 0.860007 1  ]
+            Shape "sphere"
+        AttributeEnd
+
+        AttributeBegin
+            ConcatTransform [ 0.02 0 0.034641 0 0.034641 0 -0.02 0 0 0.04 0 0 0.439921 0.70134 0.761965 1  ]
+            Shape "sphere"
+        AttributeEnd
+
+        AttributeBegin
+            ConcatTransform [ 0.02 0 0.034641 0 0.034641 0 -0.02 0 0 0.04 0 0 0.496525 0.04 0.860007 1  ]
+            Shape "sphere"
+        AttributeEnd
+    AttributeEnd
+    Shape "plymesh"
+        "string filename" [ "geometry/metal_stand.ply" ]
+AttributeEnd

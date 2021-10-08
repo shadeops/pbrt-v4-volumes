@@ -6,7 +6,8 @@ all: ./images/aerial_explosion_filmic.png \
 	 ./images/ground_explosion_filmic.png \
 	 ./images/ground_explosion_alt_filmic.png \
 	 ./images/smoke_streams_filmic.png \
-	 ./images/matchbulb_filmic.png
+	 ./images/matchbulb_filmic.png \
+	 ./images/anemone.png
 
 ./aerial_explosion/aerial_explosion_aces.exr : ./aerial_explosion/aerial_explosion.pbrt
 	pbrt $(SPP) $(GPU) --outfile $@ $<
@@ -35,14 +36,20 @@ all: ./images/aerial_explosion_filmic.png \
 ./smoke_streams/smoke_streams.exr : ./smoke_streams/smoke_streams.pbrt
 	pbrt $(SPP) $(GPU) --outfile $@ $<
 
-./images/smoke_streams_filmic.png : ./smoke_streams/smoke_streams.exr
-	imgtool convert --outfile $@ --aces-filmic $<
+./images/smoke_streams_tonemap.png : ./smoke_streams/smoke_streams.exr
+	imgtool convert --outfile $@ --tonemap $<
 
 ./matchbulb/matchbulb.exr : ./matchbulb/matchbulb.pbrt
 	pbrt $(SPP) $(GPU) --outfile $@ $<
 
 ./images/matchbulb_filmic.png : ./matchbulb/matchbulb.exr
 	imgtool convert --outfile $@ --aces-filmic $<
+
+./anemone/anemone.exr : ./anemone/anemone.pbrt
+	pbrt $(SPP) $(GPU) --outfile $@ $<
+
+./images/anemone_tonemap.png : ./anemone/anemone.exr
+	imgtool convert --outfile $@ --tonemap $<
 
 clean:
 	rm -vf ./images/*.png
