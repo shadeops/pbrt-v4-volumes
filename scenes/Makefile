@@ -7,7 +7,8 @@ all: ./images/aerial_explosion_filmic.png \
 	 ./images/ground_explosion_alt_filmic.png \
 	 ./images/smoke_streams_filmic.png \
 	 ./images/matchbulb_filmic.png \
-	 ./images/anemone.png
+	 ./images/anemone_tonemap.png \
+	 ./images/rainbow_box_tonemap.png
 
 ./aerial_explosion/aerial_explosion_aces.exr : ./aerial_explosion/aerial_explosion.pbrt
 	pbrt $(SPP) $(GPU) --outfile $@ $<
@@ -50,6 +51,12 @@ all: ./images/aerial_explosion_filmic.png \
 
 ./images/anemone_tonemap.png : ./anemone/anemone.exr
 	imgtool convert --outfile $@ --tonemap $<
+
+./rainbow_box/rainbow_box.exr : ./rainbow_box/rainbow_box.pbrt
+	pbrt $(SPP) $(GPU) --outfile $@ $<
+
+./images/rainbow_box_tonemap.png : ./rainbow_box/rainbow_box.exr
+	imgtool convert --outfile $@ --maxluminance 3 --tonemap $<
 
 clean:
 	rm -vf ./images/*.png
