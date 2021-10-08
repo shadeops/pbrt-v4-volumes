@@ -1,0 +1,62 @@
+Film "rgb"
+    "integer yresolution" [ 720 ]
+    "integer xresolution" [ 1280 ]
+    "string filename" [ "rainbow_box.exr" ]
+PixelFilter "gaussian"
+    "float yradius" [ 2 ]
+    "float xradius" [ 2 ]
+Sampler "zsobol"
+    "integer pixelsamples" [ 8192 ]
+Integrator "volpath"
+    "integer maxdepth" [ 30 ]
+Accelerator "bvh"
+Transform [ 1 0 0 0 0 0.9881 -0.1541 0 0 -0.1541 -0.9881 0 0 -8.749 47.68 1  ]
+Camera "perspective"
+    "float screenwindow" [ -1 1 -0.5625 0.5625 ]
+    "float fov" [ 45.15 ]
+
+
+WorldBegin
+
+AttributeBegin
+    Translate 0 18.99 0
+    Rotate -90 1 0 0
+    AreaLightSource "diffuse"
+        "bool twosided" [ false ]
+        "float scale" [ 16 ]
+
+    AttributeBegin
+        Scale 30 4 30
+        ReverseOrientation
+        Shape "bilinearmesh"
+            "point3 P" [ -0.5 -0.5 0 0.5 -0.5 0 -0.5 0.5 0 0.5 0.5 0 ]
+    AttributeEnd
+AttributeEnd
+
+AttributeBegin
+    ConcatTransform [ 1 0 0 0 0 1 0 0 0 0 1 0 0 -0.05 0 1  ]
+
+    AttributeBegin
+        ConcatTransform [ 17.5 0 0 0 0 11 0 0 0 0 5 0 0 10 0 1  ]
+        Include "geometry/rainbow_box_medium.pbrt.gz"
+        Material "interface"
+        MediumInterface "/obj/rainbow_box/volumewrangle1[3,4,5,0,1,2]" ""
+        Shape "trianglemesh"
+            "integer indices" [ 0 3 1 0 2 3 4 7 5 4 6 7 6 2 7 6 3 2 5 1 4 5 0 1 5 
+                                2 0 5 7 2 1 6 4 1 3 6 ]
+            "point3 P" [ 1 -1 1 -1 -1 1 1 1 1 -1 1 1 -1 -1 -1 1 -1 -1 -1 1 -1 1 1 
+                         -1 ]
+    AttributeEnd
+AttributeEnd
+
+AttributeBegin
+    ConcatTransform [ 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1  ]
+    Shape "trianglemesh"
+        "integer indices" [ 1 0 4 2 1 5 0 3 7 2 3 0 5 4 7 7 6 5 0 1 2 7 4 0 5 6 2 
+                            4 5 1 ]
+        "point3 P" [ -17 0 -7 17 0 -7 17 0 7 -17 0 7 -17 19 -7 17 19 -7 17 19 7 -17 
+                     19 7 ]
+        "normal N" [ 0.5774 0.5774 0.5774 -0.5774 0.5774 0.5774 -0.7071 0.7071 0 
+                     0.7071 0.7071 0 0.5774 -0.5774 0.5774 -0.5774 -0.5774 0.5774 
+                     -0.7071 -0.7071 0 0.7071 -0.7071 0 ]
+AttributeEnd
