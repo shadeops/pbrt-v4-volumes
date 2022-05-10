@@ -1,8 +1,8 @@
 # pbrt-v4-volumes
 A collection of volume renders and their scenes for [pbrt-v4](https://github.com/mmp/pbrt-v4).
-* [Ground Explosion](./READEME.md#ground-explosion)
-* [Ground Explosion Alt](./READEME.md#ground-explosion-alt)
-* [Aerial Explosion](./READEME.md#aerial-explosion)
+* [Ground Explosion](./README.md#ground-explosion)
+* [Ground Explosion Alt](./README.md#ground-explosion-alt)
+* [Aerial Explosion](./README.md#aerial-explosion)
 * [Matchbulb](./README.md#matchbulb)
 * [Anemone](./README.md#anemone)
 * [Rainbow Box](./README.md#rainbow-box)
