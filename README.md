@@ -8,7 +8,7 @@ A collection of volume renders and their scenes for pbrt-v4.
 * [Rainbow Box](./README.md#rainbow_box)
 * [Teapot Cloud](./README.md#teapot_cloud)
 
-To render these you need to use a recent version of pbrt-v4 (specifically https://github.com/mmp/pbrt-v4/tree/06cdbec or newer).
+To render these you need to use a recent version of [pbrt-v4](https://github.com/mmp/pbrt-v4) (specifically https://github.com/mmp/pbrt-v4/tree/06cdbec or newer).
 
 # Examples
 
