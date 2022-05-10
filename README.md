@@ -1,12 +1,12 @@
 # pbrt-v4-volumes
 A collection of volume renders and their scenes for [pbrt-v4](https://github.com/mmp/pbrt-v4).
-* [Ground Explosion](./READEME.md#ground_explosion)
-* [Ground Explosion Alt](./READEME.md#ground_explosion_alt)
-* [Aerial Explosion](./READEME.md#aerial_explosion)
+* [Ground Explosion](./READEME.md#ground-explosion)
+* [Ground Explosion Alt](./READEME.md#ground-explosion-alt)
+* [Aerial Explosion](./READEME.md#aerial-explosion)
 * [Matchbulb](./README.md#matchbulb)
 * [Anemone](./README.md#anemone)
-* [Rainbow Box](./README.md#rainbow_box)
-* [Teapot Cloud](./README.md#teapot_cloud)
+* [Rainbow Box](./README.md#rainbow-box)
+* [Teapot Cloud](./README.md#teapot-cloud)
 
 To render these you need to use a recent version of pbrt-v4 (specifically https://github.com/mmp/pbrt-v4/tree/06cdbec or newer).
 
