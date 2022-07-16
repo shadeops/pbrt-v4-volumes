@@ -32,7 +32,7 @@ AttributeEnd
 AttributeBegin
 	# {
 	MakeNamedMedium "/obj/ground_explosion/RENDER-0"
-		"float LeScale" [ 0.125 ]
+		"float Lescale" [ 0.125 ]
 		"string filename" [ "geometry/ground_explosion-RENDER-0.170.nvdb" ]
 		"float temperaturescale" [ 4500 ]
 		"float scale" [ 5 ]

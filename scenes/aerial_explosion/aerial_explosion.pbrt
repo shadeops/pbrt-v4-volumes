@@ -42,7 +42,7 @@ AttributeBegin
 
     AttributeBegin
         MakeNamedMedium "/obj/aerial_explosion/output-0"
-            "float LeScale" [ 0.5 ]
+            "float Lescale" [ 0.5 ]
             "float scale" [ 0.5 ]
             "rgb sigma_a" [ 0.1 0.1 0.1 ]
             "string filename" [ "geometry/aerial_explosion-output-0.120.nvdb" ]

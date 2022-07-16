@@ -136,9 +136,9 @@ AttributeBegin
             "rgb sigma_s" [ 2 2 2 ]
             "string filename" [ "geometry/flame-RENDER-0.64.nvdb" ]
             "float temperaturescale" [ 5500 ]
-            "float temperaturecutoff" [ 0.01 ]
+            "float temperatureoffset" [ 0.01 ]
             "rgb sigma_a" [ 0.05 0.05 0.05 ]
-            "float LeScale" [ 1.25 ]
+            "float Lescale" [ 1.25 ]
             "string type" [ "nanovdb" ]
 
         Material "interface"
@@ -177,9 +177,9 @@ AttributeBegin
             "rgb sigma_s" [ 2 2 2 ]
             "string filename" [ "geometry/flame_L1-RENDER-0.64.nvdb" ]
             "float temperaturescale" [ 5500 ]
-            "float temperaturecutoff" [ 0.01 ]
+            "float temperatureoffset" [ 0.01 ]
             "rgb sigma_a" [ 0.05 0.05 0.05 ]
-            "float LeScale" [ 1.25 ]
+            "float Lescale" [ 1.25 ]
             "string type" [ "nanovdb" ]
 
         Material "interface"
@@ -220,9 +220,9 @@ AttributeBegin
             "rgb sigma_s" [ 2 2 2 ]
             "string filename" [ "geometry/flame_R1-RENDER-0.64.nvdb" ]
             "float temperaturescale" [ 5500 ]
-            "float temperaturecutoff" [ 0.01 ]
+            "float temperatureoffset" [ 0.01 ]
             "rgb sigma_a" [ 0.05 0.05 0.05 ]
-            "float LeScale" [ 1.25 ]
+            "float Lescale" [ 1.25 ]
             "string type" [ "nanovdb" ]
 
         Material "interface"
@@ -263,9 +263,9 @@ AttributeBegin
             "rgb sigma_s" [ 2 2 2 ]
             "string filename" [ "geometry/flame_L2-RENDER-0.64.nvdb" ]
             "float temperaturescale" [ 5500 ]
-            "float temperaturecutoff" [ 0.01 ]
+            "float temperatureoffset" [ 0.01 ]
             "rgb sigma_a" [ 0.05 0.05 0.05 ]
-            "float LeScale" [ 1.25 ]
+            "float Lescale" [ 1.25 ]
             "string type" [ "nanovdb" ]
 
         Material "interface"
@@ -308,9 +308,9 @@ AttributeBegin
             "rgb sigma_s" [ 2 2 2 ]
             "string filename" [ "geometry/flame_R2-RENDER-0.64.nvdb" ]
             "float temperaturescale" [ 5500 ]
-            "float temperaturecutoff" [ 0.01 ]
+            "float temperatureoffset" [ 0.01 ]
             "rgb sigma_a" [ 0.05 0.05 0.05 ]
-            "float LeScale" [ 1.25 ]
+            "float Lescale" [ 1.25 ]
             "string type" [ "nanovdb" ]
 
         Material "interface"
@@ -353,9 +353,9 @@ AttributeBegin
             "rgb sigma_s" [ 2 2 2 ]
             "string filename" [ "geometry/flame_L3-RENDER-0.64.nvdb" ]
             "float temperaturescale" [ 5500 ]
-            "float temperaturecutoff" [ 0.01 ]
+            "float temperatureoffset" [ 0.01 ]
             "rgb sigma_a" [ 0.05 0.05 0.05 ]
-            "float LeScale" [ 1.25 ]
+            "float Lescale" [ 1.25 ]
             "string type" [ "nanovdb" ]
 
         Material "interface"
