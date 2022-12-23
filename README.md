@@ -6,6 +6,7 @@ A collection of volume renders and their scenes for [pbrt-v4](https://github.com
 * [Matchbulb](./README.md#matchbulb)
 * [Anemone](./README.md#anemone)
 * [Rainbow Box](./README.md#rainbow-box)
+* [Smoke Streams](./README.md#smoke-streams)
 * [Teapot Cloud](./README.md#teapot-cloud)
 
 To render these you need to use a recent version of pbrt-v4 (specifically https://github.com/mmp/pbrt-v4/tree/06cdbec or newer).
