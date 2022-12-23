@@ -54,6 +54,13 @@ pbrt --outfile ./rainbow_box/rainbow_box.exr ./rainbow_box/rainbow_box.pbrt
 imgtool convert --outfile ./scenes/images/rainbow_box_tonemap.png --colorspace srgb --tonemap ./rainbow_box/rainbow_box.exr
 ```
 
+### Smoke Streams
+![./scenes/images/rainbow_box_tonemap.png](/scenes/images/smoke_streams_tonemap.png)
+```
+pbrt --outfile ./smoke_streams/smoke_streams.exr ./smoke_streams/smoke_streams.pbrt
+imgtool convert --outfile ./scenes/images/smoke_streams_tonemap.png --colorspace srgb --tonemap ./smoke_streams/smoke_streams.exr
+```
+
 ### Teapot Cloud
 ![./scenes/images/teapot_cloud_filmic.png](/scenes/images/teapot_cloud_filmic.png)
 ```
